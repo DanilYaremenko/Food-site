@@ -2,9 +2,9 @@ window.addEventListener('DOMContentLoaded', function() {
 
     // Tabs
     
-	let tabs = document.querySelectorAll('.tabheader__item'),
-		tabsContent = document.querySelectorAll('.tabcontent'),
-		tabsParent = document.querySelector('.tabheader__items');
+	let tabs = document.querySelectorAll('.tabheader__item');
+	let tabsContent = document.querySelectorAll('.tabcontent');
+	let tabsParent = document.querySelector('.tabheader__items');
 
 	function hideTabContent() {
         
@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	tabsParent.addEventListener('click', function(event) {
 		const target = event.target;
-		if(target && target.classList.contains('tabheader__item')) {
+		if (target && target.classList.contains('tabheader__item')) {
             tabs.forEach((item, i) => {
                 if (target == item) {
                     hideTabContent();
@@ -44,11 +44,11 @@ window.addEventListener('DOMContentLoaded', function() {
     const deadline = '2022-06-11';
 
     function getTimeRemaining(endtime) {
-        const t = Date.parse(endtime) - Date.parse(new Date()),
-            days = Math.floor( (t / (1000 * 60 * 60 * 24)) ),
-            seconds = Math.floor( (t / 1000) % 60 ),
-            minutes = Math.floor( (t / 1000 / 60) % 60 ),
-            hours = Math.floor( (t / (1000 * 60 * 60) % 24) );
+        const t = Date.parse(endtime) - Date.parse(new Date());
+        const days = Math.floor( (t / (1000 * 60 * 60 * 24)) );
+        const seconds = Math.floor( (t / 1000) % 60 );
+        const minutes = Math.floor( (t / 1000 / 60) % 60 );
+        const hours = Math.floor( (t / (1000 * 60 * 60) % 24) );
 
         return {
             'total': t,
@@ -69,12 +69,12 @@ window.addEventListener('DOMContentLoaded', function() {
 
     function setClock(selector, endtime) {
 
-        const timer = document.querySelector(selector),
-            days = timer.querySelector("#days"),
-            hours = timer.querySelector('#hours'),
-            minutes = timer.querySelector('#minutes'),
-            seconds = timer.querySelector('#seconds'),
-            timeInterval = setInterval(updateClock, 1000);
+        const timer = document.querySelector(selector);
+        const days = timer.querySelector("#days");
+        const hours = timer.querySelector('#hours');
+        const minutes = timer.querySelector('#minutes');
+        const seconds = timer.querySelector('#seconds');
+        const timeInterval = setInterval(updateClock, 1000);
 
         updateClock();
 
@@ -96,9 +96,9 @@ window.addEventListener('DOMContentLoaded', function() {
 
     //Modal
 
-    const modalTrigger = document.querySelectorAll('[data-modal]'),
-    modal = document.querySelector('.modal'),
-    modalCloseBtn = document.querySelector('[data-close]');
+    const modalTrigger = document.querySelectorAll('[data-modal]');
+    const modal = document.querySelector('.modal');
+    const modalCloseBtn = document.querySelector('[data-close]');
 
     modalTrigger.forEach(btn => {
         btn.addEventListener('click', openModal());
@@ -114,6 +114,7 @@ window.addEventListener('DOMContentLoaded', function() {
         modal.classList.add('show');
         modal.classList.remove('hide');
         document.body.style.overflow = 'hidden';
+        clearInterval(modalTimerId);
     }
 
     modalCloseBtn.addEventListener('click', closeModal);
@@ -130,6 +131,14 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    const modalTimerId = setTimeout(openModal, 40000);
 
+    function showModalByScroll() {
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+            openModal();
+            window.removeEventListener('scroll', showModalByScroll);
+        }
+    }
+    window.addEventListener('scroll', showModalByScroll);
 
 });
