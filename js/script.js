@@ -114,4 +114,12 @@ window.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = '';
     });
 
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.add('hide');
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+    });
+
 });
