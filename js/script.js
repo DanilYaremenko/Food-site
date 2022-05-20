@@ -101,7 +101,7 @@ window.addEventListener('DOMContentLoaded', function() {
     const modalCloseBtn = document.querySelector('[data-close]');
 
     modalTrigger.forEach(btn => {
-        btn.addEventListener('click', openModal());
+        btn.addEventListener('click', openModal);
     });
 
     function closeModal() {
