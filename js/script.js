@@ -41,14 +41,14 @@ window.addEventListener('DOMContentLoaded', function() {
 
     //Timer
 
-    const deadline = '2022-06-11';
+    const deadline = '2022-07-05';
 
     function getTimeRemaining(endtime) {
         const t = Date.parse(endtime) - Date.parse(new Date());
         const days = Math.floor( (t / (1000 * 60 * 60 * 24)) );
         const seconds = Math.floor( (t / 1000) % 60 );
         const minutes = Math.floor( (t / 1000 / 60) % 60 );
-        const hours = Math.floor( (t / (1000 * 60 * 60) % 24) );
+        const hours = Math.floor( (t / (1000 * 60 * 60) % 24) - 3 ); //We're in GMT+3 time zone
 
         return {
             'total': t,
