@@ -437,4 +437,15 @@ window.addEventListener('DOMContentLoaded', function() {
     getDynamicInfo('#height');
     getDynamicInfo('#weight');
     getDynamicInfo('#age');
+
+    //Contacts
+
+    const contacts = document.querySelector('.contacts');
+
+    const goToBot = () => {
+        window.scrollTo(0, document.body.scrollHeight);
+        return;
+    };
+
+    contacts.addEventListener("click", goToBot);
 });
